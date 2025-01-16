@@ -1,6 +1,5 @@
-// ======================
-// TAXAS PADRÃO DA CAPIM
-// ======================
+// =====================================
+// TAXAS PADRÃO DA CAPIM (exemplo)
 const taxasCapim = {
   1: 3.15,  2: 4.39,  3: 4.96,  4: 5.54,  5: 6.12,  6: 6.70,  
   7: 7.48,  8: 8.06,  9: 8.64, 10: 9.22, 11: 9.35, 12: 10.14, 
@@ -8,9 +7,9 @@ const taxasCapim = {
  18: 14.98, 19: 15.75, 20: 16.52, 21: 17.29, 22: 18.00, 23: 18.50
 };
 
-// ======================
-// SELETORES DE ELEMENTOS
-// ======================
+// =====================================
+// SELETORES DE ELEMENTOS GERAIS
+// =====================================
 const vendasMesInput   = document.getElementById('vendasMes');
 const numParcelasRange = document.getElementById('numParcelas');
 const numParcelasLabel = document.getElementById('numParcelasLabel');
@@ -27,7 +26,9 @@ const capimTotalEl     = document.getElementById('capimTotal');
 const capimParcelaEl   = document.getElementById('capimParcela');
 const economiaEl       = document.getElementById('economia');
 
-// Sidebar e Proposta
+// =====================================
+// SELETORES: SIDEBAR E PROPOSTA
+// =====================================
 const btnAvancadas         = document.getElementById('btnAvancadas');
 const sidebar              = document.getElementById('sidebar');
 const overlay              = document.getElementById('overlay');
@@ -37,9 +38,17 @@ const contatoInput         = document.getElementById('contato');
 const btnEnviarProposta    = document.getElementById('btnEnviarProposta');
 const btnEnviarPropostaTopo= document.getElementById('btnEnviarPropostaTopo');
 
-// ======================
-// EVENTOS
-// ======================
+// =====================================
+// SELETORES: TOGGLE (AUTO x SPOT)
+// =====================================
+const btnAuto         = document.getElementById('toggleAuto');     // Botão "Antecipa Auto"
+const btnSpot         = document.getElementById('toggleSpot');     // Botão "Antecipa Spot"
+const autoContainer   = document.getElementById('autoContainer');  // Container com Taxas Capim + Calculadora
+const spotContainer   = document.getElementById('spotContainer');  // Container em branco (por enquanto)
+
+// =====================================
+// EVENTOS PRINCIPAIS
+// =====================================
 vendasMesInput.addEventListener('input', formatarMoeda);
 vendasMesInput.addEventListener('blur', () => {
   if (vendasMesInput.value.trim() === '') {
@@ -58,18 +67,40 @@ numParcelasRange.addEventListener('input', () => {
 });
 
 btnCalcular.addEventListener('click', calcular);
+
+// Sidebar
 btnAvancadas.addEventListener('click', abrirSidebar);
 overlay.addEventListener('click', fecharSidebar);
 btnFecharSidebar.addEventListener('click', fecharSidebar);
 btnEnviarProposta.addEventListener('click', enviarProposta);
 btnEnviarPropostaTopo.addEventListener('click', enviarProposta);
 
-// ======================
-// FUNÇÕES GERAIS
-// ======================
+// Toggle
+btnAuto.addEventListener('click', () => {
+  // Mostra o "autoContainer" e esconde o "spotContainer"
+  autoContainer.style.display = 'block';
+  spotContainer.style.display = 'none';
+  // Muda a classe "active" no botão
+  btnAuto.classList.add('active');
+  btnSpot.classList.remove('active');
+});
+
+btnSpot.addEventListener('click', () => {
+  // Mostra o "spotContainer" e esconde o "autoContainer"
+  autoContainer.style.display = 'none';
+  spotContainer.style.display = 'block';
+  // Muda a classe "active" no botão
+  btnSpot.classList.add('active');
+  btnAuto.classList.remove('active');
+});
+
+// =====================================
+// FUNÇÕES DE FORMATAÇÃO
+// =====================================
 
 /**
- * Formata o valor de entrada (vendasMensais) como moeda brasileira.
+ * Formata o valor de entrada (vendasMesInput) em moeda brasileira.
+ * Ex.: "400000" -> "R$ 4.000,00"
  */
 function formatarMoeda() {
   let valor = vendasMesInput.value.replace(/[^\d]/g, '');
@@ -87,7 +118,7 @@ function formatarMoeda() {
 }
 
 /**
- * Formata o valor de taxa para o formato XX,XX%.
+ * Formata o valor de taxa "XX,XX" e adiciona "%" no final.
  */
 function formatarTaxaInputPercentual(input) {
   let valor = input.value.replace(/[^\d]/g, '');
@@ -104,7 +135,7 @@ function formatarTaxaInputPercentual(input) {
 }
 
 /**
- * Atualiza o rótulo de parcelas conforme o valor do range.
+ * Atualiza os rótulos de parcelas (por ex. "12x").
  */
 function atualizarLabelParcelas(value) {
   numParcelasLabel.textContent = value + 'x';
@@ -112,7 +143,7 @@ function atualizarLabelParcelas(value) {
 }
 
 /**
- * Converte uma string de moeda ("R$ XX.XXX,YY") para número (float).
+ * Converte uma string de moeda "R$ XX.XXX,YY" para número (ex.: 40000.00).
  */
 function converterValorMoedaParaNumero(str) {
   const valorStr = str.replace(/[^\d]/g, '');
@@ -121,7 +152,7 @@ function converterValorMoedaParaNumero(str) {
 }
 
 /**
- * Converte uma string de taxa ("XX,YY%") para número float (XX.YY).
+ * Converte uma string de taxa "XX,YY%" para número decimal (ex.: 5.40).
  */
 function converterTaxaParaNumero(str) {
   if (!str) return 0;
@@ -131,7 +162,7 @@ function converterTaxaParaNumero(str) {
 }
 
 /**
- * Formata um número para o padrão brasileiro com pontos e vírgula.
+ * Formata número em padrão brasileiro (por ex.: 40000.5 -> "40.000,50").
  */
 function formatarNumeroComPontos(num) {
   return num.toLocaleString('pt-BR', {
@@ -140,14 +171,15 @@ function formatarNumeroComPontos(num) {
   });
 }
 
-/**
- * Calcula e exibe os resultados de taxas entre concorrência e Capim.
- */
+// =====================================
+// CÁLCULO DE TAXAS E EXIBIÇÃO DE RESULTADOS
+// =====================================
 function calcular() {
   const valor = converterValorMoedaParaNumero(vendasMesInput.value);
   const parcelas = parseInt(numParcelasRange.value, 10);
   const taxaConcorrencia = converterTaxaParaNumero(taxaAtualInput.value);
 
+  // Validações
   if (isNaN(valor) || valor <= 0) {
     alerta.innerHTML = 'Preencha o valor de vendas no mês corretamente.';
     resultBlock.style.display = 'none';
@@ -160,34 +192,33 @@ function calcular() {
     return;
   }
 
+  // Limpa alerta e mostra resultados
   alerta.innerHTML = '';
   resultBlock.style.display = 'block';
 
-  // Cálculo para a concorrência
+  // Concorrência
   const valorConcorrencia = valor * (taxaConcorrencia / 100);
   const valorFinalConc = valor + valorConcorrencia;
   const parcelaConc = valorFinalConc / parcelas;
 
-  // Cálculo para a Capim
+  // Capim
   const taxaCapimEscolhida = taxasCapim[parcelas] || 0;
   const valorCapim = valor * (taxaCapimEscolhida / 100);
   const valorFinalCapim = valor + valorCapim;
   const parcelaCapim = valorFinalCapim / parcelas;
 
-  // Exibe resultados da concorrência
-  concTaxaEl.textContent   = `${taxaConcorrencia.toFixed(2)}%`;
-  concTotalEl.textContent  = 'R$ ' + formatarNumeroComPontos(valorFinalConc);
-  concParcelaEl.textContent= 'R$ ' + formatarNumeroComPontos(parcelaConc);
+  // Exibe no DOM
+  concTaxaEl.textContent    = `${taxaConcorrencia.toFixed(2)}%`;
+  concTotalEl.textContent   = 'R$ ' + formatarNumeroComPontos(valorFinalConc);
+  concParcelaEl.textContent = 'R$ ' + formatarNumeroComPontos(parcelaConc);
 
-  // Exibe resultados Capim
   capimTaxaEl.textContent   = `${taxaCapimEscolhida.toFixed(2)}%`;
   capimTotalEl.textContent  = 'R$ ' + formatarNumeroComPontos(valorFinalCapim);
   capimParcelaEl.textContent= 'R$ ' + formatarNumeroComPontos(parcelaCapim);
 
-  // Diferença e economia
+  // Diferença
   const economiaValor = valorFinalConc - valorFinalCapim;
   let economiaTexto = '';
-  
   if (economiaValor > 0) {
     economiaTexto = `Você economiza: R$ ${formatarNumeroComPontos(economiaValor)} optando pela Capim!`;
   } else if (economiaValor < 0) {
@@ -198,13 +229,9 @@ function calcular() {
   economiaEl.textContent = economiaTexto;
 }
 
-// ======================
-// FUNÇÕES PARA SIDEBAR
-// ======================
-
-/**
- * Cria as linhas interativas de taxas avançadas (1x até 23x).
- */
+// =====================================
+// FUNÇÕES: SIDEBAR (TAXAS AVANÇADAS)
+// =====================================
 function criarLinhasTaxasAvancadas() {
   taxasList.innerHTML = '';
   
@@ -262,18 +289,15 @@ function criarLinhasTaxasAvancadas() {
 
     inputsContainer.appendChild(inputTxt);
     inputsContainer.appendChild(range);
-
     row.appendChild(label);
     row.appendChild(inputsContainer);
     taxasList.appendChild(row);
   }
 }
 
-/**
- * Cria a lista de taxas padrão da Capim no aside.
- */
 function criarListaTaxasCapim() {
   const lista = document.getElementById('listaTaxasCapim');
+  if (!lista) return; // caso não exista no HTML
   lista.innerHTML = '';
   
   for (let i = 1; i <= 23; i++) {
@@ -283,36 +307,35 @@ function criarListaTaxasCapim() {
   }
 }
 
-/**
- * Abre a sidebar de taxas avançadas.
- */
 function abrirSidebar() {
   sidebar.classList.add('open');
   overlay.style.display = 'block';
 }
 
-/**
- * Fecha a sidebar de taxas avançadas.
- */
 function fecharSidebar() {
   sidebar.classList.remove('open');
   overlay.style.display = 'none';
 }
 
-/**
- * Simula o envio de proposta.
- */
 function enviarProposta() {
   const contato = contatoInput.value.trim();
   alert(`Dados enviados com sucesso!\nContato: ${contato || 'Não informado'}`);
   
-  // Fecha sidebar e limpa campo
   fecharSidebar();
   contatoInput.value = '';
 }
 
-// ======================
+// =====================================
 // INICIALIZAÇÃO
-// ======================
+// =====================================
+
+// Cria as linhas avançadas na sidebar
 criarLinhasTaxasAvancadas();
+
+// Cria a lista de taxas Capim no aside (Taxas Capim)
 criarListaTaxasCapim();
+
+// Define inicialmente que estamos no modo "Antecipa Auto" (pode ser omitido se já estiver no HTML)
+autoContainer.style.display = 'block';
+spotContainer.style.display = 'none';
+btnAuto.classList.add('active');
