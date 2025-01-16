@@ -18,127 +18,132 @@
   </a>
 </header>
 
-<!-- Container principal -->
 <div class="main-wrapper">
 
-  <!-- Toggle de opções -->
+  <!-- Toggle no topo -->
   <div class="toggle-container">
     <button id="toggleAuto" class="toggle-button active">Antecipa Auto</button>
     <button id="toggleSpot" class="toggle-button">Antecipa Spot</button>
   </div>
 
-  <!-- CONTAINER "AUTO" (mostra o conteúdo atual) -->
+  <!-- CONTAINER "AUTO" (exibido por padrão) -->
   <div id="autoContainer">
-    <aside class="capim-rates" id="capimRates">
-      <h2>Taxas Capim</h2>
-      <ul id="listaTaxasCapim"></ul>
-    </aside>
-
-    <main class="container">
-      <section class="calc-container">
-        <h2>Calculadora</h2>
-        
-        <label for="vendasMes">Vendas no mês (R$):</label>
-        <input type="text" id="vendasMes" value="R$ 40.000,00" />
-
-        <div class="parcelas-control">
-          <label for="numParcelas">
-            Número de Parcelas: <span id="numParcelasLabel">12x</span>
-          </label>
-          <input type="range" id="numParcelas" min="1" max="23" value="12" step="1" />
-        </div>
-
-        <label for="taxaAtual">
-          Taxa da Concorrência para <span id="parcelasAtualLabel">12x</span>:
-        </label>
-        <input type="text" id="taxaAtual" placeholder="0,00%" />
-
-        <button id="btnCalcular">Calcular</button>
-        <div id="alerta" class="alerta"></div>
-
-        <div id="result-block" class="result-block" style="display: none;">
-          <h3>Resultados</h3>
-          <div class="info-row">
-            <strong>Taxa Concorrência:</strong>
-            <span id="concTaxa"></span>
-          </div>
-          <div class="info-row">
-            <strong>Valor da transação:</strong>
-            <span id="concTotal"></span>
-          </div>
-          <div class="info-row">
-            <strong>Taxa Atual:</strong>
-            <span id="concParcela"></span>
-          </div>
-
-          <hr />
-
-          <div class="info-row">
-            <strong>Taxa Capim:</strong>
-            <span id="capimTaxa"></span>
-          </div>
-          <div class="info-row">
-            <strong>Valor Capim:</strong>
-            <span id="capimTotal"></span>
-          </div>
-          <div class="info-row">
-            <strong>Parcela Capim:</strong>
-            <span id="capimParcela"></span>
-          </div>
-
-          <div class="economia" id="economia"></div>
-        </div>
-        
-        <div class="promocao-box">
-          <h3>Promoção Imperdível!</h3>
-          <ul>
-            <li>3 meses de isenção de aluguel da maquininha.</li>
-            <li>A partir do 4° mês, isenção de aluguel para faturamento &gt; R$ 15 mil.</li>
-            <li>Isenção da mensalidade da Agenda Capim a partir de R$ 40 mil de faturamento.</li>
-          </ul>
-        </div>
-
-        <div class="advanced-trigger">
-          <button id="btnAvancadas">Peça uma proposta</button>
-        </div>
-      </section>
-
-      <!-- Overlay e Sidebar para proposta -->
-      <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-          <h2>Defina suas taxas parceladas</h2>
-          <button id="btnFecharSidebar">×</button>
-        </div>
-        <p>
-          Preencha as taxas para cada parcela. Digite somente números, a vírgula e decimais aparecem automaticamente.
-        </p>
-        
-        <div class="opcoes">
-          <input type="text" id="contato" class="contato-input" placeholder="Seu email ou telefone" />
-          <button id="btnEnviarPropostaTopo" class="enviar-btn">Enviar</button>
-          <div class="taxas-list" id="taxasList"></div>
-          <button id="btnEnviarProposta" class="enviar-btn">Enviar</button>
-        </div>
+    <!-- Linha com duas colunas (Taxas + Calculadora) -->
+    <div class="row">
+      <aside class="capim-rates" id="capimRates">
+        <h2>Taxas Capim</h2>
+        <ul id="listaTaxasCapim"></ul>
       </aside>
-      <div class="overlay" id="overlay"></div>
-    </main>
+
+      <main class="container">
+        <section class="calc-container">
+          <h2>Calculadora</h2>
+          
+          <label for="vendasMes">Vendas no mês (R$):</label>
+          <input type="text" id="vendasMes" value="R$ 40.000,00" />
+
+          <div class="parcelas-control">
+            <label for="numParcelas">
+              Número de Parcelas: <span id="numParcelasLabel">12x</span>
+            </label>
+            <input type="range" id="numParcelas" min="1" max="23" value="12" step="1" />
+          </div>
+
+          <label for="taxaAtual">
+            Taxa da Concorrência para <span id="parcelasAtualLabel">12x</span>:
+          </label>
+          <input type="text" id="taxaAtual" placeholder="0,00%" />
+
+          <button id="btnCalcular">Calcular</button>
+          <div id="alerta" class="alerta"></div>
+
+          <div id="result-block" class="result-block" style="display: none;">
+            <h3>Resultados</h3>
+            <div class="info-row">
+              <strong>Taxa Concorrência:</strong>
+              <span id="concTaxa"></span>
+            </div>
+            <div class="info-row">
+              <strong>Valor da transação:</strong>
+              <span id="concTotal"></span>
+            </div>
+            <div class="info-row">
+              <strong>Taxa Atual:</strong>
+              <span id="concParcela"></span>
+            </div>
+
+            <hr />
+
+            <div class="info-row">
+              <strong>Taxa Capim:</strong>
+              <span id="capimTaxa"></span>
+            </div>
+            <div class="info-row">
+              <strong>Valor Capim:</strong>
+              <span id="capimTotal"></span>
+            </div>
+            <div class="info-row">
+              <strong>Parcela Capim:</strong>
+              <span id="capimParcela"></span>
+            </div>
+
+            <div class="economia" id="economia"></div>
+          </div>
+          
+          <div class="promocao-box">
+            <h3>Promoção Imperdível!</h3>
+            <ul>
+              <li>3 meses de isenção de aluguel da maquininha.</li>
+              <li>A partir do 4° mês, isenção de aluguel para faturamento &gt; R$ 15 mil.</li>
+              <li>Isenção da mensalidade da Agenda Capim a partir de R$ 40 mil de faturamento.</li>
+            </ul>
+          </div>
+
+          <div class="advanced-trigger">
+            <button id="btnAvancadas">Peça uma proposta</button>
+          </div>
+        </section>
+
+        <!-- Overlay e Sidebar para proposta -->
+        <aside class="sidebar" id="sidebar">
+          <div class="sidebar-header">
+            <h2>Defina suas taxas parceladas</h2>
+            <button id="btnFecharSidebar">×</button>
+          </div>
+          <p>
+            Preencha as taxas para cada parcela. Digite somente números, a vírgula e decimais aparecem automaticamente.
+          </p>
+          
+          <div class="opcoes">
+            <input type="text" id="contato" class="contato-input" placeholder="Seu email ou telefone" />
+            <button id="btnEnviarPropostaTopo" class="enviar-btn">Enviar</button>
+            <div class="taxas-list" id="taxasList"></div>
+            <button id="btnEnviarProposta" class="enviar-btn">Enviar</button>
+          </div>
+        </aside>
+        <div class="overlay" id="overlay"></div>
+      </main>
+    </div> <!-- Fim row -->
   </div> <!-- /autoContainer -->
 
-  <!-- CONTAINER "SPOT" (fica em branco por enquanto) -->
+  <!-- CONTAINER "SPOT" (oculto por padrão) -->
   <div id="spotContainer" style="display: none;">
-    <aside class="capim-rates">
-      <h2>Antecipa Spot</h2>
-      <p>Em breve, conteúdo...</p>
-    </aside>
-    <main class="container">
-      <section class="calc-container">
-        <h2>Calculadora Spot</h2>
-        <p>Por enquanto, vazio...</p>
-      </section>
-    </main>
+    <div class="row">
+      <aside class="capim-rates">
+        <h2>Antecipa Spot</h2>
+        <p>Futuramente, taxas e conteúdo...</p>
+      </aside>
+
+      <main class="container">
+        <section class="calc-container">
+          <h2>Calculadora Spot</h2>
+          <p>Conteúdo provisoriamente em branco</p>
+        </section>
+      </main>
+    </div> <!-- Fim row -->
   </div> <!-- /spotContainer -->
 
-</div> <!-- /main-wrapper -->
+</div><!-- /main-wrapper -->
 
 <footer>
   <p>&copy; 2024 Capim - Todos os direitos reservados</p>
