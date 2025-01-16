@@ -1,20 +1,20 @@
-/* ========== GLOBAL STYLES ========== */
+/* ========== GLOBAL ========== */
 body {
-  margin: 0;
   font-family: 'Poppins', sans-serif;
   background: #FFFFFF;
   color: #32205f;
+  margin: 0;
 }
 
 /* ---------- HEADER ---------- */
 header {
+  background: #fff;
+  height: 60px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 60px;
   padding: 0 1rem;
-  background: #fff;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  justify-content: space-between;
 }
 
 header .logo {
@@ -23,14 +23,14 @@ header .logo {
 }
 
 .especialista-link {
+  color: #32205f;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
   background: #BEE41E;
   padding: 0.5rem 1rem;
-  color: #32205f;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: none;
   border-radius: 4px;
-  transition: background 0.2s ease-in-out;
+  transition: background 0.2s ease;
 }
 
 .especialista-link:hover {
@@ -40,34 +40,73 @@ header .logo {
 /* ---------- MAIN WRAPPER ---------- */
 .main-wrapper {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column; /* Mudamos para coluna para acomodar o toggle acima */
   max-width: 1200px;
   margin: 2rem auto;
   gap: 2rem;
   padding: 0 1rem;
 }
 
-/* ---------- ASIDE (TAXAS CAPIM) ---------- */
+/* ---------- TOGGLE AREA ---------- */
+.toggle-container {
+  text-align: center;
+  margin-top: 1rem;    /* espaço superior do toggle */
+  margin-bottom: 1rem; /* espaço inferior do toggle */
+}
+
+.toggle-button {
+  background: #ccc;      /* cor neutra quando não está ativo */
+  border: none;
+  color: #32205f;
+  font-weight: 600;
+  margin: 0 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.toggle-button:hover {
+  background: #bbb;
+}
+
+.toggle-button.active {
+  background: #BEE41E; /* mesmo tom que seus outros botões */
+  color: #32205f;
+}
+
+.toggle-button.active:hover {
+  background: #aacb1b;  /* hover para quando está ativo */
+}
+
+/* ---------- EXTRA ESPAÇO NOS QUADROS ---------- */
+/* Empurra as seções "capim-rates" e "container" um pouco para baixo */
+.capim-rates,
+.container {
+  margin-top: 2rem; /* Ajuste se quiser mais ou menos espaço */
+}
+
+/* ---------- ASIDE: TAXAS CAPIM ---------- */
 .capim-rates {
   flex: 1;
-  max-width: 350px;
   background: #ffffff;
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  max-width: 350px;
 }
 
 .capim-rates h2 {
-  margin-bottom: 1rem;
   font-size: 1.2rem;
   font-weight: 600;
   color: #32205f;
+  margin-bottom: 1rem;
 }
 
 .capim-rates ul {
   list-style: none;
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 .capim-rates li {
@@ -77,23 +116,23 @@ header .logo {
   margin-bottom: 0.5rem;
 }
 
-/* ---------- MAIN CONTAINER (CALCULADORA) ---------- */
+/* ---------- CONTAINER PRINCIPAL ---------- */
 .container {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   min-width: 300px;
   max-width: 450px;
   position: relative;
-  display: flex;
-  flex-direction: column;
 }
 
-/* Seção da Calculadora */
+/* ---------- SEÇÃO DA CALCULADORA ---------- */
 .calc-container {
-  width: 100%;
   background: #B5EFF2;
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 100%;
 }
 
 .calc-container h2 {
@@ -127,17 +166,17 @@ input[type="text"] {
   width: 100%;
 }
 
-/* Botões genéricos */
 button {
-  cursor: pointer;
   padding: 0.8rem 1rem;
   background: #BEE41E;
   color: #32205f;
   font-weight: bold;
   border: none;
   border-radius: 4px;
+  cursor: pointer;
   font-size: 1rem;
-  transition: background 0.2s ease-in-out;
+  transition: background 0.2s ease;
+  text-align: center;
 }
 
 button:hover {
@@ -145,17 +184,17 @@ button:hover {
 }
 
 .alerta {
-  margin-top: 1rem;
-  font-size: 0.9rem;
   color: red;
+  font-size: 0.9rem;
+  margin-top: 1rem;
 }
 
-/* ---------- BLOCOS DE RESULTADOS ---------- */
+/* ---------- RESULTADOS ---------- */
 .result-block {
-  margin-top: 1rem;
   background: #fff;
   border-radius: 8px;
   padding: 1rem;
+  margin-top: 1rem;
 }
 
 .result-block h3 {
@@ -178,25 +217,25 @@ button:hover {
 
 .economia {
   margin-top: 1rem;
-  text-align: center;
   font-size: 1.2rem;
   font-weight: 700;
+  text-align: center;
   color: #BEE41E; /* Verde limão */
 }
 
 /* ---------- BOX PROMOCIONAL ---------- */
 .promocao-box {
-  margin-top: 1rem;
   background: #fff;
   border-radius: 8px;
   padding: 1rem;
+  margin-top: 1rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .promocao-box h3 {
-  margin-bottom: 0.5rem;
   font-size: 1rem;
   font-weight: 600;
+  margin-bottom: 0.5rem;
   color: #32205f;
 }
 
@@ -210,10 +249,10 @@ button:hover {
   margin-bottom: 0.3rem;
 }
 
-/* Trigger para proposta avançada */
+/* ---------- TRIGGER AVANÇADA ---------- */
 .advanced-trigger {
-  margin-top: 1.5rem;
   text-align: center;
+  margin-top: 1.5rem;
 }
 
 .advanced-trigger button {
@@ -222,6 +261,8 @@ button:hover {
   color: #32205f;
   font-weight: 600;
   text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
 .advanced-trigger button:hover {
@@ -281,11 +322,10 @@ button:hover {
   padding-right: 0.5rem;
 }
 
-/* Inputs na Sidebar */
 .contato-input {
-  width: 100%;
-  padding: 0.6rem;
   margin-bottom: 1rem;
+  padding: 0.6rem;
+  width: 100%;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 0.9rem;
@@ -308,28 +348,28 @@ button:hover {
 }
 
 .taxa-row-label {
-  margin-bottom: 0.3rem;
   font-size: 0.85rem;
   font-weight: 600;
+  margin-bottom: 0.3rem;
   color: #32205f;
 }
 
 .taxa-row-inputs {
   display: flex;
+  gap: 0.5rem;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
 }
 
 .taxa-input {
   flex: 0 0 60px;
-  height: 1.8rem;
   padding: 0.3rem;
   border: 1px solid #ddd;
   border-radius: 4px;
   text-align: right;
   font-size: 0.85rem;
   color: #32205f;
+  height: 1.8rem;
 }
 
 .taxa-slider {
@@ -337,8 +377,8 @@ button:hover {
 }
 
 .enviar-btn {
-  width: 100%;
   margin-top: 1rem;
+  width: 100%;
   background: #BEE41E;
   color: #32205f;
   font-weight: bold;
@@ -352,16 +392,15 @@ button:hover {
 /* ---------- OVERLAY ---------- */
 .overlay {
   position: fixed;
-  top: 0;
+  top: 0; 
   left: 0;
-  width: 100%;
+  width: 100%; 
   height: 100%;
   background: rgba(0,0,0,0.2);
   display: none;
   z-index: 998;
 }
 
-/* ---------- FOOTER ---------- */
 footer {
   text-align: center;
   color: #666;
