@@ -2,38 +2,39 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Calculadora de Taxas - Capim</title>
-  
-  <!-- Fonte e CSS -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <a href="https://capim.com.br/" target="_blank">
-      <img src="Logo_Blue.png" alt="Capim Logo" class="logo" />
-    </a>
-    <a href="https://capim.com.br/site/fale-com-um-especialista" target="_blank" class="especialista-link">
-      Fale com um especialista
-    </a>
-  </header>
+<header>
+  <a href="https://capim.com.br/" target="_blank">
+    <img src="Logo_Blue.png" alt="Capim Logo" class="logo" />
+  </a>
+  <a href="https://capim.com.br/site/fale-com-um-especialista" target="_blank" class="especialista-link">
+    Fale com um especialista
+  </a>
+</header>
 
-  <!-- Conteúdo principal -->
-  <div class="main-wrapper">
-    
-    <!-- Lateral com as taxas Capim -->
+<!-- Container principal -->
+<div class="main-wrapper">
+
+  <!-- Toggle de opções -->
+  <div class="toggle-container">
+    <button id="toggleAuto" class="toggle-button active">Antecipa Auto</button>
+    <button id="toggleSpot" class="toggle-button">Antecipa Spot</button>
+  </div>
+
+  <!-- CONTAINER "AUTO" (mostra o conteúdo atual) -->
+  <div id="autoContainer">
     <aside class="capim-rates" id="capimRates">
       <h2>Taxas Capim</h2>
       <ul id="listaTaxasCapim"></ul>
     </aside>
 
-    <!-- Container geral -->
     <main class="container">
-      
-      <!-- Seção da calculadora -->
       <section class="calc-container">
         <h2>Calculadora</h2>
         
@@ -55,10 +56,8 @@
         <button id="btnCalcular">Calcular</button>
         <div id="alerta" class="alerta"></div>
 
-        <!-- Resultados -->
         <div id="result-block" class="result-block" style="display: none;">
           <h3>Resultados</h3>
-          
           <div class="info-row">
             <strong>Taxa Concorrência:</strong>
             <span id="concTaxa"></span>
@@ -90,7 +89,6 @@
           <div class="economia" id="economia"></div>
         </div>
         
-        <!-- Box promocional -->
         <div class="promocao-box">
           <h3>Promoção Imperdível!</h3>
           <ul>
@@ -100,21 +98,19 @@
           </ul>
         </div>
 
-        <!-- Ação avançada -->
         <div class="advanced-trigger">
           <button id="btnAvancadas">Peça uma proposta</button>
         </div>
       </section>
 
-      <!-- Sidebar para proposta -->
+      <!-- Overlay e Sidebar para proposta -->
       <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
           <h2>Defina suas taxas parceladas</h2>
           <button id="btnFecharSidebar">×</button>
         </div>
         <p>
-          Preencha as taxas para cada parcela. Digite somente números, a vírgula e decimais
-          aparecem automaticamente.
+          Preencha as taxas para cada parcela. Digite somente números, a vírgula e decimais aparecem automaticamente.
         </p>
         
         <div class="opcoes">
@@ -124,19 +120,30 @@
           <button id="btnEnviarProposta" class="enviar-btn">Enviar</button>
         </div>
       </aside>
-
-      <!-- Overlay -->
       <div class="overlay" id="overlay"></div>
-
     </main>
-  </div>
+  </div> <!-- /autoContainer -->
 
-  <!-- Rodapé -->
-  <footer>
-    <p>&copy; 2024 Capim - Todos os direitos reservados</p>
-  </footer>
+  <!-- CONTAINER "SPOT" (fica em branco por enquanto) -->
+  <div id="spotContainer" style="display: none;">
+    <aside class="capim-rates">
+      <h2>Antecipa Spot</h2>
+      <p>Em breve, conteúdo...</p>
+    </aside>
+    <main class="container">
+      <section class="calc-container">
+        <h2>Calculadora Spot</h2>
+        <p>Por enquanto, vazio...</p>
+      </section>
+    </main>
+  </div> <!-- /spotContainer -->
 
-  <!-- Script principal -->
-  <script src="script.js"></script>
+</div> <!-- /main-wrapper -->
+
+<footer>
+  <p>&copy; 2024 Capim - Todos os direitos reservados</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
